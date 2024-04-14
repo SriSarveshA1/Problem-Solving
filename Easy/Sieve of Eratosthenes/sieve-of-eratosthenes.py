@@ -1,11 +1,10 @@
 #User function Template for python3
 import math
-
 class Solution:
     def sieveOfEratosthenes(self, N):
-    	#code here 
-    	
-    	prime_arrays = [ True for i in range(0,N+1)]
+        #code here 
+        
+        prime_arrays = [ True for i in range(0,N+1)]
         
         
         for i in range(2,int(math.sqrt(N))+1):
@@ -25,7 +24,7 @@ class Solution:
         
         return result
                 
-            
+
 
 #{ 
  # Driver Code Starts
