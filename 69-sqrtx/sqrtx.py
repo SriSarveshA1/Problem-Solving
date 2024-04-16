@@ -4,10 +4,9 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        if x == 0:
-            return 0
+        
 
-        low = 1
+        low = 0
         high = x
         ans = -1
         while(low<=high):
