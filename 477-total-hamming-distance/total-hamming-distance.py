@@ -18,7 +18,7 @@ class Solution(object):
             for i in range(0,31):
                 # there are total 32 bits.
                 # if we right shigt n>>i will give value of the ith bit
-                count_of_set_bits[i] += (num>>i)&1 # initially we will only count the no of set bits
+                count_of_set_bits[i] += 1 if ((num>>i)&1)>0 else 0 # initially we will only count the no of set bits
                 # later we calculate the unset bits from the count_of_set_bits
 
         
