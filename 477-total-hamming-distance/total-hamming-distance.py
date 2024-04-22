@@ -13,9 +13,9 @@ class Solution(object):
         count_of_set_bits = [0 for i in range(0,32)] # count of set bits at each bit
         count_of_unset_bits = [0 for i in range(0,32)] # n-count_of_set_bits[i] will be the count of unset bits in
                                     # the provided list of numbers
-
-        for num in nums:
-            for i in range(0,31):
+        for i in range(0,31):
+            count_of_set_bits[i] = 0
+            for num in nums:
                 # there are total 32 bits.
                 # if we right shigt n>>i will give value of the ith bit
                 count_of_set_bits[i] += 1 if ((num>>i)&1)>0 else 0 # initially we will only count the no of set bits
