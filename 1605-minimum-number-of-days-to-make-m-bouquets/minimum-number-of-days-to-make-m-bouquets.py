@@ -34,7 +34,7 @@ class Solution:
         while(low<=high):
             mid = int((low+high)/2)
 
-            print("for mid = ",mid," ",self.get_adjacent_groups(arr,no_adj_flowers,mid))
+            #print("for mid = ",mid," ",self.get_adjacent_groups(arr,no_adj_flowers,mid))
             if self.get_adjacent_groups(arr,no_adj_flowers,mid)>=no_of_botiques:
                 ans = mid
                 high = mid-1
