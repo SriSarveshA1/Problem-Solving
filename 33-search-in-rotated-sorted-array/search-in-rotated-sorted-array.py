@@ -14,7 +14,7 @@ class Solution:
         while(l<=r):
             mid = self.get_mid(l,r)
 
-            print("l = ",l," r = ",r, " mid = ",mid)
+            #print("l = ",l," r = ",r, " mid = ",mid)
 
             if (nums[mid]==target):
                 return mid 
