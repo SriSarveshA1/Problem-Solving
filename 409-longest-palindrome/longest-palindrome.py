@@ -7,9 +7,13 @@ class Solution(object):
         hash_map = dict()
         pair_count = 0
         for char in string:
+            # basically we are finding how many pairs for each character that is appearing
+
             if char in hash_map:
+                # if a particular char appears again then its part of the pair
+                
+                pair_count+=1 #so we increase the total pairs count
                 del hash_map[char]
-                pair_count+=1
             else:
                 hash_map[char]=1
         
