@@ -19,6 +19,8 @@ class Solution:
             if arr[l]<=arr[mid] and arr[l]>arr[r]:
                 l = mid+1
             else:
-                r = mid 
+                if arr[mid-1]>arr[mid]:
+                    return arr[mid]
+                r = mid-1
         
         
