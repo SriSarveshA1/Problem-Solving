@@ -36,15 +36,14 @@ class Solution(object):
 
             count_multiples_a_b = self.calculate_number_of_multiples(mid,a,b)
 
-            if(count_multiples_a_b == n):
+            if(count_multiples_a_b >= n):
                 ans = mid # trying to find the first appearing maginal number
                           # that have 'n' multiples from [1,mid] range
                 high = mid - 1
             else:
                 if count_multiples_a_b < n:
                     low = mid + 1
-                else:
-                    high = mid -1
+                
             
         return ans % 1000000007
 
