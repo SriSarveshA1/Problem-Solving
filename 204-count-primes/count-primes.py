@@ -17,6 +17,9 @@ class Solution:
         
         for i in range(2,int(math.sqrt(n))+1):
 
+            if i !=2 and i%2 == 0:
+                continue
+    
             if not prime_array[i]:
                 continue
 
