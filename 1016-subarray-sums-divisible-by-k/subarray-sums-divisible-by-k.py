@@ -13,7 +13,7 @@ class Solution:
         count = 0
         
         for i in range(0,len(nums)):
-            num_mod_k = prefix_array[i] % k
+            num_mod_k = prefix_array[i]
             
             if num_mod_k == 0: # corner case
                 count+=1 # To find the subarray from [0,i]
