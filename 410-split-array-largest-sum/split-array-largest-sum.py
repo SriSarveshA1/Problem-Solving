@@ -34,14 +34,18 @@ class Solution:
             partitions = self.find_partitions(mid,nums)
             print("mid = ",mid)
             print("partitions = ",partitions)
-            if partitions <=k:
+
+            if partitions == k:
                 ans = mid
                 high = mid-1
-            elif partitions > k:
-                low = mid+1 
+            else:
+                if partitions <k:
+                    ans = mid
+                    high = mid-1
+                elif partitions > k:
+                    low = mid+1 
            
                 
 
         
         return ans
-
