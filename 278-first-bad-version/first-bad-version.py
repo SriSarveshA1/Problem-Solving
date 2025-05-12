@@ -13,12 +13,15 @@ class Solution:
         low = 1
         high = n
 
+        ans = -1
+
         while (low<=high):
             mid = self.find_mid(low,high)
             print("l = ",low," r = ",high," mid = ",mid)
             if isBadVersion(mid):
+                ans = mid
                 high = mid - 1
             else:
                 low = mid + 1
 
-        return low
+        return ans
