@@ -8,17 +8,19 @@ class Solution:
 
         max_length = 0
 
+        nums = set(nums)
+
         for num in nums:
 
-            if not(num in already_visited_nums) and not ((num+1) in present):
+            if not ((num+1) in present):
 
                 length = 0
                 temp = num
-                already_visited_nums[num] = True
+                #already_visited_nums[num] = True
                 while temp in present:
                     temp=temp-1
                     length=length+1
-                    already_visited_nums[temp] = True
+                    #already_visited_nums[temp] = True
 
                 max_length = max(max_length,length)
                 
