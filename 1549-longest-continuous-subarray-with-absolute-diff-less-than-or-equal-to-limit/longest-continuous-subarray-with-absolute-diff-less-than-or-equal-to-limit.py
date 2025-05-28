@@ -30,10 +30,13 @@ class Solution:
 
             while abs(max_list[0].value - min_list[0].value) > limit:
 
-                if max_list[0].index < l or max_list[0].value == nums[l]:
+                if max_list[0].index == l:
+                    print(True) if max_list[0].index < l else ""
+
                     max_list.pop(0)
                 
-                if min_list[0].index < l or min_list[0].value == nums[l]:
+                if min_list[0].index == l:
+                    print(True) if min_list[0].index < l else ""
                     min_list.pop(0)
 
                 l+=1
