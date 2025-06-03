@@ -12,40 +12,17 @@ class Solution:
 
 
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
-        costs.sort(key=cmp_to_key(self.compare_func))
-
-        print("///",costs)
-
-        n = len(costs)
-        A = n/2
-        B = n/2
-
-        idx = n-1
-
+        # Sort by difference (NOT absolute difference)
+        costs.sort(key=lambda x: x[0] - x[1])
+        
+        n = len(costs) // 2
         total = 0
-
-        while idx>=0:
-            cost_of_city_a = costs[idx][0]
-            cost_of_city_b = costs[idx][1]
-
-            if  cost_of_city_a < cost_of_city_b:
-                if A>=1:
-                    A-=1
-                    total+=cost_of_city_a
-                elif B>=1:
-                    B-=1
-                    total+=cost_of_city_b
+        
+        # First n people go to city A, rest go to city B
+        for i in range(len(costs)):
+            if i < n:
+                total += costs[i][0]  # Send to city A
             else:
-                if B>=1:
-                    B-=1
-                    total+=cost_of_city_b
-                elif A>=1:
-                    A-=1
-                    total+=cost_of_city_a
-            
-            idx-=1
-
+                total += costs[i][1]  # Send to city B
+        
         return total
-        
-
-        
