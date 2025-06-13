@@ -1,23 +1,24 @@
-class Solution(object):
-    def longestPalindrome(self, string):
-        """
-        :type s: str
-        :rtype: int
-        """
-        hash_map = dict()
-        pair_count = 0
-        for char in string:
-            # basically we are finding how many pairs for each character that is appearing
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        # Find the freq of all chars.
+        # Then Try to add all the even chars and if the count is odd just do odd_count-1
 
+        hash_map = dict()
+
+        for char in s:
             if char in hash_map:
-                # if a particular char appears again then its part of the pair
-                
-                pair_count+=1 #so we increase the total pairs count
-                del hash_map[char]
+                hash_map[char]+=1
             else:
                 hash_map[char]=1
         
-        if len(hash_map)!=0:
-            return (pair_count*2)+1
-        
-        return (pair_count*2)
+        length = 0
+        for key,value in hash_map.items():
+            if value%2 == 0:
+                length+=value
+            else:
+                if length%2 == 0:
+                    length+= value
+                else:
+                    length+= value-1
+            
+        return length
