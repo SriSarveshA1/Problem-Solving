@@ -17,7 +17,7 @@ class Solution:
             if (nums[mid]==target):
                 return True 
 
-            while (nums[l] == nums[mid] and nums[mid] == nums[r]):
+            while (nums[l] == nums[r] and nums[l] != target):
                 l = l+1
                 r = r-1
                 if l>r:
