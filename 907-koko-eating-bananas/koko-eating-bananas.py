@@ -29,7 +29,6 @@ class Solution:
         high = max(arr)
         ans = -1
 
-        arr = sorted(arr)
 
         while (low<=high):
             mid = self.find_mid(low,high)
