@@ -9,15 +9,15 @@ class Solution:
 
         for num in nums:
 
-            if not ((num+1) in nums) and num not in already_visited_nums:
+            if not ((num+1) in nums):
 
                 length = 0
                 temp = num
-                already_visited_nums[num] = True
+                # already_visited_nums[num] = True
                 while temp in nums:
                     temp=temp-1
                     length=length+1
-                    already_visited_nums[temp] = True
+                    # already_visited_nums[temp] = True
 
                 max_length = max(max_length,length)
                 
