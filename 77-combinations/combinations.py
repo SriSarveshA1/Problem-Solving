@@ -2,7 +2,7 @@ class Solution(object):
 
     def generate_subs(self,cur,res,i,k,n):
        
-        if i>n:
+        if i>n or len(cur)>k:
             if len(cur) == k:
                 temp = []
                 for v in cur:
