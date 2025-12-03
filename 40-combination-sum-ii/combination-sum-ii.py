@@ -1,58 +1,43 @@
 class Solution(object):
+    def is_prev_element_same(self,nums,i):
+        if i==0:
+            return False
+        
+        if nums[i-1] == nums[i]:
+            return True
 
-    def find_all_combinations(self,picked,arr,target,res,cur,i):
+    def generate_subs(self,nums,cur,res,i,is_picked,target):
+        n = len(nums)
 
-        n = len(arr)
-
-        if target<0:
-            return 
-
-        if i>=n:
-
-            if target==0:
+        if i>=n or target<0:
+            if target == 0:
                 temp = []
-
-                for ele in cur:
-                    temp.append(ele)
-                    
+                for v in cur:
+                    temp.append(v)
+                
                 res.append(temp)
+
             return
 
-        if i == 0:
-            cur.append(arr[i])
-            self.find_all_combinations(True,arr,target-arr[i],res,cur,i+1) # picking 
+        if is_picked==True or not self.is_prev_element_same(nums,i):
+            cur.append(nums[i])
+            self.generate_subs(nums, cur, res, i+1, True, target-nums[i])
             cur.pop()
-        
-        else:
-            if(picked): # only for the first element we are not performing any check and directly picking
-                cur.append(arr[i])
-                self.find_all_combinations(True,arr,target-arr[i],res,cur,i+1) # picking 
-                cur.pop()
-                
-            
-            # for other index elements we are performing the check
-            if(not picked and arr[i]!=arr[i-1]): # we are checking whether the previous index element in the array is 
-                                # same as the current i pointed element in the array
-                cur.append(arr[i])
-                self.find_all_combinations(True,arr,target-arr[i],res,cur,i+1) # picking 
-                cur.pop()
-
-
-        self.find_all_combinations(False,arr,target,res,cur,i+1) # not picking 
 
         
+        self.generate_subs(nums, cur, res, i+1, False, target)
         
-        
-
-    def combinationSum2(self, arr, target):
+    def combinationSum2(self, candidates, target):
         """
         :type candidates: List[int]
         :type target: int
         :rtype: List[List[int]]
         """
+        nums=candidates
+        nums.sort() # Sorting the numbers in asc order so that the duplicate numbers comes first
+
         res = []
-        arr.sort()
 
-        self.find_all_combinations(False,arr,target,res,[],0)
-
+        self.generate_subs(nums,[],res,0,True,target)
+        
         return res
