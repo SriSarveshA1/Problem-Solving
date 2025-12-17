@@ -93,6 +93,9 @@ class Solution(object):
         res = []
         n = len(string)
 
+        if n>12:
+            return []
+
         cur = ""
         self.generate_all_ips_by_validating(string,res,cur)
         return res
