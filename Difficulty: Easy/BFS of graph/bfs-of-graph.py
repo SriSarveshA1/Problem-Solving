@@ -1,36 +1,25 @@
 class Solution:
-    # Function to return Breadth First Search Traversal of given graph.
     def bfs(self, adj):
         # code here
-        n = len(adj)
         
-        visited = [False for i in range(n)]
+        no_of_nodes = len(adj)
         
-        queue = [0]
-        visited[0] = True
-
+        queue = []
+        visited = [False for i in range(no_of_nodes) ]
+        
         res = []
         
-        while True:
+        visited[0] = True
+        queue.append(0)
+        
+        while(len(queue)!=0):
+            cur_ele = queue.pop(0)
+            res.append(cur_ele)
             
-            current_node = queue.pop(0)
-            
-            res.append(current_node) 
-            
-            for adj_node in adj[current_node]:
-                if not visited[adj_node]:
-                    queue.append(adj_node) 
-                    visited[adj_node] = True # We should mark this node visited as soon as possible
-                    # because the next node we might visit can also have the same adj_node as its adjasent
-                    # if we mark this now only as visited the next node won't be markthing this adj
-            
-            if not queue:  # Replace 'condition' with your actual loop condition
-                break
-               
+            for node in adj[cur_ele]:
+                
+                if not visited[node]:
+                    queue.append(node)
+                    visited[node] = True
         
         return res
-        
-        
-        
-        
-        
