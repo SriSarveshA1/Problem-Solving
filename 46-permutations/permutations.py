@@ -1,34 +1,40 @@
 class Solution(object):
 
-    def return_first_matching_availble_idx(self,n, picked_arr):
-        for idx in range(0,n):
-            if not picked_arr[idx]:
-                return idx
-        return -1
+    def generate_permutations(self,n,nums,picked_arr,cur,res):
 
-    def generate_paranthesis(self,nums,cur,res,picked_arr):
-        n = len(nums)
         if len(cur) == n:
-            res.append(cur[:])
+
+            # now add this cur to res
+            temp = []
+            for ele in cur:
+                temp.append(ele)
+            
+            res.append(temp)
             return
         
         for i in range(0,n):
+            # Try to mark each 'i' as picked and then call for the next recursion
             if picked_arr[i]:
                 continue
             
-            picked_arr[i] = True
             cur.append(nums[i])
-            self.generate_paranthesis(nums,cur,res,picked_arr)
+            picked_arr[i]=True
+            self.generate_permutations(n,nums,picked_arr,cur,res)
+            picked_arr[i]=False
             cur.pop()
-            picked_arr[i] = False
-        
+
+
 
     def permute(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        cur = []
         res = []
-        picked_arr = [False for i in nums]
-        self.generate_paranthesis(nums,[],res,picked_arr)
+        n = len(nums)
+        picked_arr = [False for i in range(n)]
+        self.generate_permutations(n,nums,picked_arr,cur,res)
         return res
+
+        
