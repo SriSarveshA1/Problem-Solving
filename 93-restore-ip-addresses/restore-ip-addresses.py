@@ -29,12 +29,15 @@ class Solution:
             # we validate the current cur and add it to result
             validation_result,string = self.validate_whole_ip_address(cur)
             if validation_result:
-                
                 res.append(string)
             
             return
 
         for i in range(start,n):
+
+            if ((i+1) - start)+1 >4:
+                break
+
             if self.validate_ip_part(s[start:i+1]):
                 cur.append(s[start:i+1])
                 self.generateIpAddresses(cur,res,i+1,s,n)
