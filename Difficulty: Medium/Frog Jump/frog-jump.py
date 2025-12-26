@@ -1,26 +1,23 @@
-#User function Template for python3
 class Solution:
-    def minCost(self, height):
-        # code here
-        
-        n = len(height)
+    def minCost(self, arr):
+        n = len(arr)
         
         if n==1:
             return 0
         
         if n==2:
-            return abs(height[1]-height[0])
+            return abs(arr[1]-arr[0])
         
+        # code here
         dp = [0 for i in range(n)]
         
         dp[0] = 0
-        dp[1] = abs(height[1]-height[0])
+        dp[1] = abs(arr[1]-arr[0])
         
         for i in range(2,n):
-            dp[i] = min (
-                dp[i-2]+abs(arr[i]-arr[i-2]),
-                dp[i-1]+abs(arr[i]-arr[i-1])
-                )
+            ans1 = dp[i-1] + abs(arr[i]-arr[i-1])
+            ans2 = dp[i-2] + abs(arr[i]-arr[i-2])
+            
+            dp[i] = min(ans1,ans2)
         
         return dp[n-1]
-        
