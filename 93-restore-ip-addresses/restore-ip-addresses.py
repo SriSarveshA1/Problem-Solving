@@ -1,101 +1,50 @@
-import math
+class Solution:
 
-class Solution(object):
+    def validate_ip_part(self,string):
+        # 1.CHeck for trailing zeros
+        # 2. ANd check for the ip part range
+        int_value = int(string)
+        str_value_of_int = str(int_value)
 
-    def no_digits(self,cur):
-        if len(cur)>0:
-            cur = int(cur)
-            if cur == 0:
-                return 1
-            return int(math.log10(cur))+1
-        return 0
-
-
-
-    def is_valid_ip(self,string):
-        
-        splits = []
-        cur = ""
-        
-        for ch in string:
-            if ch == '.':
-                if len(cur) > 3:
-                    return False
-                
-                if len(cur)>0 and int(cur)>255:
-                    return False
-                
-                if len(cur) != self.no_digits(cur):
-                    return False
-                
-                splits.append(cur)
-                cur = ""
-                continue
-            
-            cur= cur +""+ ch 
-        
-        if cur!="":
-            if len(cur) > 3:
-                return False
-                
-            if len(cur)>0 and int(cur)>255:
-                return False
-                
-            if len(cur) != self.no_digits(cur):
-                return False
-                
-            splits.append(cur)
-            
-        # print("splits = ",splits)
-
-        if len(splits)!= 4:
+        if len(str_value_of_int) != len(string):
+            #Trailing zero's present
             return False
         
-        return True
-    
-    
-    def generate_all_ips_by_validating(self,string,res,cur):
-        #print("string = ",string)
-
-        n = len(string)
+        if int_value>=0 and int_value<=255:
+            return True
         
-        if n<=0:
-            if self.is_valid_ip(cur):
-                print("cur = ",cur)
-                res.append(cur)
-
-            return
+        return False
+    
+    def validate_whole_ip_address(self,cur)->(bool,str):
+        if len(cur)!=4:
+            # No of parts is greater than 4
+            return False,""
         
-        for i in range(0,n):
-            # we generate new cur by slicing
-            # [start:i+1] s1
-            # . s2 
-            # [i+1:end+1] s3
-            # call the recursion again
-            temp = ""
-            if len(cur) == 0:
-                temp = cur+string[0:i+1]
-            else:
-                temp = cur + "."+string[0:i+1]
+        return True, ".".join(cur)
+
+
+    def generateIpAddresses(self,cur,res,start,s,n):
+        if start>=n:
+            # If we reach the terminal
+            # we validate the current cur and add it to result
+            validation_result,string = self.validate_whole_ip_address(cur)
+            if validation_result:
+                
+                res.append(string)
             
-            if i+1<=n-1:
-                self.generate_all_ips_by_validating(string[i+1:],res,temp)
-            else:
-                self.generate_all_ips_by_validating("",res,temp)
+            return
+
+        for i in range(start,n):
+            if self.validate_ip_part(s[start:i+1]):
+                cur.append(s[start:i+1])
+                self.generateIpAddresses(cur,res,i+1,s,n)
+                cur.pop()
 
 
-
-    def restoreIpAddresses(self, string):
-        """
-        :type s: str
-        :rtype: List[str]
-        """
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        
+        cur = []
         res = []
-        n = len(string)
-
-        if n>12:
-            return []
-
-        cur = ""
-        self.generate_all_ips_by_validating(string,res,cur)
+        n = len(s)
+        self.generateIpAddresses(cur,res,0,s,n)
         return res
