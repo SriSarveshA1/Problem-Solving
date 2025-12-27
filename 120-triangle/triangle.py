@@ -27,16 +27,16 @@ class Solution:
 
     
         for i in range(1,m):
-            old_dp = dp.copy()
-            for j in range(0,len(triangle[i])):
+            for j in range((len(triangle[i])-1) , -1, -1 ): # starting from the end_idx, step=-1,goes till end
+
                 ans1 = 100000000 # (i-1,j-1)
                 ans2 = 100000000 # (i-1,j)
 
                 if self.check_for_valid_i_and_j(triangle,i-1,j-1):
-                    ans1 = old_dp[j-1]
+                    ans1 = dp[j-1]
                 
                 if self.check_for_valid_i_and_j(triangle,i-1,j):
-                    ans2 = old_dp[j]
+                    ans2 = dp[j]
                 
                 dp[j] = min(ans1,ans2) + triangle[i][j]
                # print("dp" , dp)
