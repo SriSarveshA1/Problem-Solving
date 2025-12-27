@@ -19,32 +19,31 @@ class Solution:
         if m == 1:
             return triangle[0][0]
 
-        dp = []
+        max_v = 100000000
 
-        # iterate 
-        for row in range(0,m):
-            col_length = len(triangle[row]) # finding the column length for each row
-         
-            dp.append([0 for k in range(0,col_length)]) # creating an array of that length and appending
-        
-        dp[0][0] = triangle[0][0]
+        dp = [max_v for j in range(0,len(triangle[m-1]))]
+
+        dp[0] = triangle[0][0]
 
     
         for i in range(1,m):
+            old_dp = dp.copy()
             for j in range(0,len(triangle[i])):
                 ans1 = 100000000 # (i-1,j-1)
                 ans2 = 100000000 # (i-1,j)
 
                 if self.check_for_valid_i_and_j(triangle,i-1,j-1):
-                    ans1 = dp[i-1][j-1]
+                    ans1 = old_dp[j-1]
                 
                 if self.check_for_valid_i_and_j(triangle,i-1,j):
-                    ans2 = dp[i-1][j]
+                    ans2 = old_dp[j]
                 
-                dp[i][j] = min(ans1,ans2) + triangle[i][j]
+                dp[j] = min(ans1,ans2) + triangle[i][j]
+               # print("dp" , dp)
         
         
-        return min(dp[m-1])
+        
+        return min(dp)
 
 
 
