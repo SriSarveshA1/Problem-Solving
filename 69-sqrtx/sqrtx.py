@@ -1,26 +1,24 @@
-class Solution(object):
-    def mySqrt(self, x):
-        """
-        :type x: int
-        :rtype: int
-        """
+class Solution:
+
+    def mySqrt(self, x: int) -> int:
         
+        l = 1 
+        r = x   
 
-        low = 0
-        high = x
-        ans = -1
-        while(low<=high):
-            mid = float(low+(high-low)/2)
-            print("low = ",low," mid = ",mid," high = ",high)
-            if (mid*mid == x):
-                ans = mid
-                return int(ans)
+        ans = 0
 
-            if(mid * mid < x):
+        while(l<=r):
+            mid = int((l+r)/2)
+
+            sqr = mid * mid
+            if sqr == x:
+                return mid
+            
+            if sqr < x:
                 ans = mid
-                low = int(mid+1)
+                l = mid+1
             else:
-                high = int(mid-1)
+                r = mid-1
+            
+        return ans
 
-        return int(ans)
-        
