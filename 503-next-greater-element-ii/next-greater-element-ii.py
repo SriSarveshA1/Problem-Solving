@@ -3,11 +3,10 @@ class Solution:
         
         stack = []
 
-        res = []
-
-        hash_map = dict()
-
         n = len(nums)
+
+        res = [-1 for i in range(0,n)]
+
 
         for i in range((2*n)-1,-1,-1):
 
@@ -15,14 +14,13 @@ class Solution:
                 stack.pop(len(stack)-1) 
             
             if len(stack) == 0:
-                hash_map[i%n] = -1
+                res[i%n] = -1
             else:
-                hash_map[i%n] = stack[len(stack)-1]   
+                res[i%n] = stack[len(stack)-1]   
 
             stack.append(nums[i%n])
 
-        for i in range(0,len(nums)):
-            res.append(hash_map[i])
+
         
         return res
                 
