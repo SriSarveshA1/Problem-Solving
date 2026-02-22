@@ -14,11 +14,11 @@ class Solution:
             while len(stack) != 0 and stack[len(stack)-1]<= nums[i%n]:
                 stack.pop(len(stack)-1) 
             
-            if i%n not in hash_map or hash_map[i%n] == -1 :
-                if len(stack) == 0:
+            #if i%n not in hash_map or hash_map[i%n] == -1 :
+            if len(stack) == 0:
                     hash_map[i%n] = -1
-                else:
-                    hash_map[i%n] = stack[len(stack)-1]
+            else:
+                    hash_map[i%n] = stack[len(stack)-1]   
 
             stack.append(nums[i%n])
 
