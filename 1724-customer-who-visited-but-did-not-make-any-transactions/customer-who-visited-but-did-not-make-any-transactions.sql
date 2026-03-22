@@ -1,2 +1,1 @@
-# Write your MySQL query statement below
-select customer_id, count(*) as count_no_trans from visits v where NOT EXISTS(select visit_id from transactions t where t.visit_id=v.visit_id) group by customer_id;
+select v.customer_id, count(*) as count_no_trans from visits as v where NOT EXISTS (select 1 from transactions t where t.visit_id=v.visit_id) group by v.customer_id;
