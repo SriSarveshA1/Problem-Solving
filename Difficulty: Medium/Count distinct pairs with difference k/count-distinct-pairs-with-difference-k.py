@@ -1,56 +1,48 @@
 #User function Template for python3
+from collections import defaultdict
 
 class Solution:
     
-    def get_tuple(self,num1,num2):
-        min_num = min(num1,num2)
-        max_num = max(num1,num2)
-        return (min_num,max_num)
+    def return_formed_tuple(self,ele1,ele2):
+        first = max(ele1,ele2)
+        sec = min(ele1,ele2)
+        return (first,sec)
     
 	def TotalPairs(self, nums, k):
 		# Code here
 		
-		freq_map = dict()
+		hash_map = defaultdict(int)
 		
-		count = 0
+		for ele in nums:
+		    hash_map[ele]+=1
+		   
+		tuple_set = set()
 		
-		set_ele = set()
+		nums.sort()
 		
-        
-        for num in nums:
-            if num in freq_map:
-		        freq_map[num] += 1
-		    else:
-		        freq_map[num] = 1
-        
-        
-        for num in nums:
-            
-            if k + num in freq_map and ( self.get_tuple(num,k+num) not in set_ele):
-                
-                if k+num == num and k==0 and freq_map[num]<2:
-                    continue
-                
-                count += 1
-                set_ele.add(self.get_tuple(num,k+num)) 
-            
-           
-            
-        return count
+		n = len(nums)
+		
+		count = 0 
+		
+		# a - b = k, we will construct k +b and find a is there in hash_map
+		
+		for ele in nums:
+		    
+		    formed_tuple = self.return_formed_tuple(ele,k+ele)
+		    
+		    if k+ele in hash_map and formed_tuple not in tuple_set:
+		        if k+ele == ele and k == 0 and hash_map.get(ele) < 2:
+		            continue # its not a pair
+		        
+		        tuple_set.add(formed_tuple)
+		        count+=1
+		
+		return count
+		      
+		        
+		        
+		        
+		        
+		    
 
-
-#{ 
- # Driver Code Starts
-#Initial Template for Python 3
-
-if __name__ == '__main__':
-	T=int(input())
-	for i in range(T):
-		n, k = input().split()
-		n = int(n)
-		k = int(k)
-		nums = list(map(int,input().split()))
-		ob = Solution()
-		ans = ob.TotalPairs(nums, k)
-		print(ans)
-# } Driver Code Ends
+		
